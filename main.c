@@ -2,6 +2,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <time.h>
+#include <string.h>
 
 void binaryPrint(int mode);
 
@@ -12,7 +13,7 @@ int main(){
     return 0;
   }
 
-  printf("%d B\n",sb.st_size);
+  printf("%ld B\n",sb.st_size);
 
   int mode = sb.st_mode;
   int killer = 256+128+64+32+16+8+4+2+1;
