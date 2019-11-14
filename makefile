@@ -1,4 +1,4 @@
-all: main.c
+all: main.c header.h
 	gcc -o program main.c
 run:
 	./program

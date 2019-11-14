@@ -3,8 +3,7 @@
 #include <errno.h>
 #include <time.h>
 #include <string.h>
-
-void binaryPrint(int mode);
+#include "header.h"
 
 int main(){
   struct stat sb;
@@ -12,16 +11,18 @@ int main(){
     printf("%s",strerror(errno));
     return 0;
   }
-
-  printf("%ld B\n",sb.st_size);
-
   int mode = sb.st_mode;
   int killer = 256+128+64+32+16+8+4+2+1;
   mode = killer & mode;
+
+  printf("Investigating the metadata of makefile\n");
+  printf("The file size in bytes is %ld B\n",sb.st_size);
+  printf("The file size in kilobytes is %f KB\n",sb.st_size/1024.0);
+  printf("The file size in megabytes is %f MB\n",sb.st_size/1024.0/1024.0);
+  printf("The file size in gigabytes is %f GB\n",sb.st_size/1024.0/1024.0/1024.0);
   binaryPrint(mode);
-  time_t time = sb.st_atime;
-  printf("%s",ctime(&time));
-  //printf("\n");
+  printf("The last time the file was accessed was at: %s\n", ctime(& (sb.st_atime)));
+
 
 }
 void binaryPrint(int mode){
@@ -48,5 +49,5 @@ void binaryPrint(int mode){
     mode = mode>>1;
   }
   permissions[9] = 0;
-  printf("%s",permissions);
+  printf("The file permissions are: %s\n", permissions);
 }

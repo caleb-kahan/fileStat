@@ -1,0 +1,1 @@
+void binaryPrint(int mode);
